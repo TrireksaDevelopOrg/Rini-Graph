@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Penjadwalan", "Penjadwalan\Penjadwalan.csproj", "{25208C10-2C09-42AD-8BB7-C38350F1C22F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Penjadwalan.Tests", "Penjadwalan.Tests\Penjadwalan.Tests.csproj", "{A23D625E-0FC9-478A-8C39-7C8CEF5AEDD8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{25208C10-2C09-42AD-8BB7-C38350F1C22F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25208C10-2C09-42AD-8BB7-C38350F1C22F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25208C10-2C09-42AD-8BB7-C38350F1C22F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25208C10-2C09-42AD-8BB7-C38350F1C22F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A23D625E-0FC9-478A-8C39-7C8CEF5AEDD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A23D625E-0FC9-478A-8C39-7C8CEF5AEDD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A23D625E-0FC9-478A-8C39-7C8CEF5AEDD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A23D625E-0FC9-478A-8C39-7C8CEF5AEDD8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {640039FD-881C-4AB0-A132-D94189C2176B}
+	EndGlobalSection
+EndGlobal

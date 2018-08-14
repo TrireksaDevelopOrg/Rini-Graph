@@ -1,0 +1,127 @@
+﻿@{
+
+                ViewBag.Title = "Home Page";
+}
+
+<script src="~/node_modules/vis/dist/vis.js"></script>
+<link href="~/node_modules/vis/dist/vis.css" rel="stylesheet" />
+    <div id="mynetwork"></div>
+
+    <div>
+        <table class="table">
+            <tr>
+                <th></th>
+                <th ng-repeat="item in DataNodes">{{item.label}}</th>
+            </tr>
+            <tr ng-repeat="items in Datas">
+                <td ng-repeat="item in items">
+                    <input style="width:40px" ng-model="item.value" />
+                </td>
+            </tr>
+        </table>
+
+        <button ng-click="Show()">OK</button>
+
+    </div>
+
+
+
+</div>
+
+
+<script type="text/javascript">
+    angular.module("app", [])
+        .controller("ctrl", function ($scope,$http) {
+            var white = "white";
+            $scope.edges = [];
+            $scope.DataNodes = [];
+            $scope.apa = "AKU";
+            $http({
+                method: 'GET',
+                url: 'api/matrik'
+            }).then(function successCallback(response) {
+                $scope.DataNodes = response.data.Nodes;
+                $scope.nodes = new vis.DataSet($scope.DataNodes);
+
+
+                $scope.Datas = [];
+                angular.forEach($scope.DataNodes, function (value,key) {
+                    var items = [];
+                    var label = { value: value.label };
+                    items.push(label);
+
+                    angular.forEach($scope.DataNodes, function (value1, key1) {
+                        var item = { from: value.id, to: value1.id,value:0 };
+                        items.push(item);
+                    });
+                    $scope.Datas.push(items);
+                });
+
+
+
+
+
+            }, function errorCallback(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+
+            $scope.Show = function () {
+
+                angular.forEach($scope.Datas, function (value, key) {
+
+                    angular.forEach(value, function (value1, key1) {
+                        if (value1.from != undefined && value1.value > 0) {
+                            $scope.edges.push(value1);
+                        }
+                         })
+
+                })
+
+
+
+
+                // provide the data in the vis format
+
+                angular.forEach($scope.nodes, function (value, key) {
+
+
+                });
+
+
+
+
+
+
+
+
+                var data = {
+                    nodes: $scope.nodes,
+                    edges: $scope.edges
+                };
+                var options = {};
+
+                // initialize your network!
+                var container = document.getElementById('mynetwork');
+
+                var network = new vis.Network(container, data, options);
+            }
+
+            // create a network
+
+
+
+        })
+
+        ;
+    // create an array with nodes
+
+</script>
+
+<style type="text/css">
+    #mynetwork {
+        width: 1000px;
+        height: 600px;
+        border: 1px solid lightgray;
+    }
+</style>

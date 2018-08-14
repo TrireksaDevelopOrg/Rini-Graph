@@ -22,6 +22,15 @@ namespace Penjadwalan
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                "~/Scripts/angular.js",
+                "~/Scripts/angular-route.js",
+                "~/assets/js/app.js",
+                "~/assets/js/routes.js",
+                "~/assets/js/services.js",
+                "~/assets/js/controllers.js"
+                ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));

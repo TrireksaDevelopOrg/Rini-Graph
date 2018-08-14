@@ -1,0 +1,30 @@
+﻿<script src="../node_modules/vis/dist/vis.js"></script>
+<link href="../node_modules/vis/dist/vis.css" rel="stylesheet" />
+<br/>
+    <div  id="mynetwork"></div>
+    <div>
+        <table class="table">
+            <tr>
+                <th></th>
+                <th ng-repeat="item in DataNodes">{{item.label}}</th>
+            </tr>
+            <tr ng-repeat="items in Datas">
+                <td ng-repeat="item in items">
+                    <input style="width:40px" ng-model="item.value" />
+                </td>
+            </tr>
+        </table>
+
+        <button ng-click="Show()">OK</button>
+
+    </div>
+
+
+<style type="text/css">
+    #mynetwork {
+        margin-top:20px;
+        width: 1000px;
+        height: 300px;
+        border: 1px solid lightgray;
+    }
+</style>

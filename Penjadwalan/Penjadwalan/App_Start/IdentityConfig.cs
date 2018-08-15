@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using MySql.AspNet.Identity;
 using Penjadwalan.Models;
 
 namespace Penjadwalan
@@ -19,6 +18,31 @@ namespace Penjadwalan
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
+            try
+            {
+                //string email = "ocph23.test@gmail.com";
+                //string password = "Sony@7777";
+                //var loginInfo = new NetworkCredential(email, password);
+                //var msg = new MailMessage();
+                //var smtpClient = new SmtpClient("smtp.gmail.com", 587);
+
+                //msg.From = new MailAddress(email);
+                //msg.To.Add(new MailAddress(message.Destination));
+                //msg.Subject = message.Subject;
+                //msg.Body = message.Body;
+                //msg.IsBodyHtml = true;
+
+                //smtpClient.EnableSsl = true;
+                //smtpClient.UseDefaultCredentials = false;
+                //smtpClient.Credentials = loginInfo;
+                //smtpClient.Send(msg);
+            }
+            catch (Exception ex)
+            {
+
+                throw new SystemException(ex.Message);
+            }
+
             return Task.FromResult(0);
         }
     }
@@ -32,7 +56,6 @@ namespace Penjadwalan
         }
     }
 
-    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
@@ -40,15 +63,18 @@ namespace Penjadwalan
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            // var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager = new ApplicationUserManager(new MySqlUserStore<ApplicationUser>());
             // Configure validation logic for usernames
+
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
             };
+
 
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
@@ -81,7 +107,7 @@ namespace Penjadwalan
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
@@ -104,6 +130,25 @@ namespace Penjadwalan
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+        }
+
+
+
+
+    }
+
+    public class ApplicationRoleManager : RoleManager<IdentityRole>
+    {
+        public ApplicationRoleManager(IRoleStore<IdentityRole, string> roleStore)
+            : base(roleStore)
+        {
+        }
+
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        {
+            var appRoleManager = new ApplicationRoleManager(new MySqlRoleStore<IdentityRole>("DefaultConnection"));
+
+            return appRoleManager;
         }
     }
 }

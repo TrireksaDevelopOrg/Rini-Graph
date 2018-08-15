@@ -1,0 +1,9 @@
+{
+  "name": "myproject",
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "bootstrap": "3.3.7",
+    "font-awesome": "fontawesome#^4.6.1",
+    "pnotify": "^3.0.0"
+  }
+}

@@ -3,25 +3,86 @@
     .factory("PetugasServices", PetugasServices)
     .factory("MessageServices",MessageServices)
     ;
-function MessageServices() {
+function MessageServices($q) {
+
+
+
     var service = {
-        error: error, success: success, warning: warning,info:innfo
+        error: error, success: success, warning: warning, info: info,dialog:dialog
     };
+  
+
+    function dialog(message) {
+       
+
+        var def = $q.defer();
+      var notice=  new PNotify({
+            title: 'Confirmation',
+          text: message, styling: 'bootstrap3',
+          icon: 'glyphicon glyphicon-question-sign',
+            hide: false,
+            confirm: {
+                confirm: true
+            },
+            buttons: {
+                closer: false,
+                sticker: false
+            },
+            history: {
+                history: false
+            },
+            addclass: 'stack-modal',
+            stack: { 'dir1': 'down', 'dir2': 'right', 'modal': true }
+        });
+
+        notice.get().on('pnotify.confirm', function () {
+            def.resolve()
+        }).on('pnotify.cancel', function () {
+            def.reject();
+        })   
+
+        return def.promise;
+    }
+
 
     function error(message) {
-
+        var stack_bottomright = {
+            dir1: 'up',
+            dir2: 'right'
+        };
+        new PNotify({
+            title: 'ERROR',
+            text: message,addclass: 'stack-bottomright',
+            type: 'error', push: 'bottom',
+            styling: 'bootstrap3'
+        });
     }
-    function success(message) {
 
-    }
-    function warning(message) {
-
-    }
     function info(message) {
-
+        new PNotify({
+            title: 'INFO',
+            text: message,
+            type: 'info',
+            styling: 'bootstrap3'
+        });
     }
-    function dialog(message, type) {
 
+    function warning(message) {
+        new PNotify({
+            title: 'WARNING',
+            text: message,
+            type: 'warning',
+            styling: 'bootstrap3'
+        });
+    }
+
+    function success(message) {
+        new PNotify({
+            title: 'SUCCESS',
+            text: message,
+            type: 'success',
+            styling: 'bootstrap3'
+        });
     }
 
 

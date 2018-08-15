@@ -20,7 +20,8 @@ namespace Penjadwalan
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                   "~/bower_components/bootstrap/dist/js/bootstrap.min.js",
+                       "~/build/js/custom.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                 "~/Scripts/angular.js",
@@ -32,8 +33,9 @@ namespace Penjadwalan
                 ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+               "~/bower_components/font-awesome/css/font-awesome.min.css",
+                "~/bower_components/bootstrap/dist/css/bootstrap.min.css",
+                      "~/build/css/custom.min.css"));
         }
     }
 }

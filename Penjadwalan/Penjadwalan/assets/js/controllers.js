@@ -2,16 +2,28 @@
 angular.module("app.controllers", [])
     .controller("PetugasController", PetugasController)
     .controller("MainController", MainController)
-    .controller("GraphController",GraphController)
+    .controller("GraphController", GraphController)
+    .controller("JadwalController",JadwalController)
     ;
 
 
-function PetugasController() {
-
+function PetugasController(MessageServices) {
+   
 }
 
 
-function MainController($scope) {
+
+function JadwalController(MessageServices) {
+    
+}
+
+function MainController($scope, MessageServices) {
+    MessageServices.dialog("Want Delete ?").then(function (response) {
+        MessageServices.success("OK");
+    }, function () {
+        MessageServices.error("Error");
+        });
+     
 }
 
 

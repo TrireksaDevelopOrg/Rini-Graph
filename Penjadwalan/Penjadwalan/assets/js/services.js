@@ -1,7 +1,8 @@
 ﻿angular.module("app.services",[])
     .factory("AuthServices", AuthServices)
-    .factory("PetugasServices", PetugasServices)
-    .factory("MessageServices",MessageServices)
+    .factory("PerawatServices", PerawatServices)
+    .factory("MessageServices", MessageServices)
+    .factory("MatrixServices", MatrixServices)
     ;
 function MessageServices($q) {
 
@@ -141,32 +142,35 @@ function AuthServices($http, MessageServices, $q) {
     return services;
 }
 
-function PetugasServices($http, $q, AuthServices,MessageServices) {
+function PerawatServices($http, $q, AuthServices,MessageServices) {
     var services = {
         instance: false,
-        DataPetugas:[],
+        Perawats:[],
         get: get, post: post, put: EditItem, delete: deleteItem
     };
 
+    get();
     function get() {
         var def = $q.defer();
-        if (instance) {
-            instance = true;
+        if (!services.instance) {
+            services.instance = true;
             $http({
                 header: AuthServices.getHeader(),
                 method: "get",
-                url: "api/petugas",
+                url: "api/perawat",
             }).then(function (response) {
                 angular.forEach(response.data, function (value, key) {
-                    services.DataPetugas.push(value);
+                    services.Perawats.push(value);
                 });
                 def.resolve(response.data);
             }, function (error) {
                 MessageServices.error(error.data);
             });
         } else {
-            def.resolve(services.DataPetugas);
+            def.resolve(services.Perawats);
         }
+
+        return def.promise;
     }
 
     function post(model) {
@@ -174,13 +178,18 @@ function PetugasServices($http, $q, AuthServices,MessageServices) {
         $http({
             header: AuthServices.getHeader(),
             method: "post",
-            url: "api/petugas",
+            url: "api/perawat",
+            data:model
         }).then(function (response) {
-            services.DataPetugas.push(value);
+            services.Perawats.push(response.data);
             def.resolve(response.data);
+            MessageServices.success("Data Berhasil Disimpan");
+            model = {};
         }, function (error) {
             MessageServices.error(error.data);
-        });
+            });
+
+        return def.promise;
     }
 
     function EditItem(model) {
@@ -188,31 +197,104 @@ function PetugasServices($http, $q, AuthServices,MessageServices) {
         $http({
             header: AuthServices.getHeader(),
             method: "put",
-            url: "api/petugas",
+            url: "api/perawat/" + model.IdPerawat,
             data:model
         }).then(function (response) {
             MessageServices.success("Data Berhasil Diubah");
             def.resolve(response.data);
         }, function (error) {
             MessageServices.error(error.data);
-        });
+            def.reject();
+            });
+
+        return def.promise;
     }
 
 
-    function DeleteItem(model) {
+    function deleteItem(model) {
         var def = $q.defer();
         $http({
             method: "delete",
-            url: "api/petugas",
+            url: "api/perawat/"+model.IdPerawat,
         }).then(function (response) {
-            var index = services.DataPetugas.indexOf(model);
-            services.DataPetugas.splice(index, 1);
+            var index = services.Perawats.indexOf(model);
+            services.Perawats.splice(index, 1);
             MessageServices.success("Data Berhasil Dihapus");
             def.resolve(response.data);
         }, function (error) {
             MessageServices.error(error.data);
-        });
+            });
+
+        return def.promise;
     }
+
+    return services;
+
+}
+
+
+
+function MatrixServices($http,$q,MessageServices) {
+    var services = {
+        instance: false,
+        Perawats: [],
+        get: get, post: post, getLast: getLast
+    };
+    get();
+    function get() {
+        var def = $q.defer();
+        if (!services.instance) {
+            services.instance = true;
+            $http({
+                method: "get",
+                url: "api/matrik",
+            }).then(function (response) {
+                angular.forEach(response.data, function (value, key) {
+                    services.Perawats.push(value);
+                });
+                def.resolve(response.data);
+            }, function (error) {
+                MessageServices.error(error.data);
+            });
+        } else {
+            def.resolve(services.Perawats);
+        }
+
+        return def.promise;
+    }
+
+
+    function getLast() {
+        var def = $q.defer();
+        $http({
+            method: "get",
+            url: "api/matrik/last",
+        }).then(function (response) {
+            def.resolve(response);
+        }, function (error) {
+            MessageServices.error(error.data);
+        });
+        return def.promise;
+    }
+
+    function post(model) {
+        var def = $q.defer();
+        $http({
+            method: "post",
+            url: "api/matrik",
+            data: model
+        }).then(function (response) {
+            services.Perawats.push(response.data);
+            def.resolve(response.data);
+            MessageServices.success("Data Berhasil Disimpan");
+            model = {};
+        }, function (error) {
+            MessageServices.error(error.data);
+        });
+
+        return def.promise;
+    }
+
 
     return services;
 

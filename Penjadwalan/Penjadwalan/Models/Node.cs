@@ -21,13 +21,12 @@ namespace Penjadwalan.Models
     {
         public List<Node> Nodes { get; set; }
         public List<Adge> Adges { get; set; }
+        public periode Periode { get; set; }
     }
 
 
-    public class Adge
+    public class Adge:matrix
     {
-        public string from { get; set; }
-        public string to { get; set; }
         public string label { get; set; }
         public string arrows { get; set; }
     }

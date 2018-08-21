@@ -1,30 +1,123 @@
-﻿<script src="../node_modules/vis/dist/vis.js"></script>
-<link href="../node_modules/vis/dist/vis.css" rel="stylesheet" />
-<br/>
-    <div  id="mynetwork"></div>
-    <div>
-        <table class="table">
-            <tr>
-                <th></th>
-                <th ng-repeat="item in DataNodes">{{item.label}}</th>
-            </tr>
-            <tr ng-repeat="items in Datas">
-                <td ng-repeat="item in items">
-                    <input style="width:40px" ng-model="item.value" />
-                </td>
-            </tr>
-        </table>
-
-        <button ng-click="Show()">OK</button>
-
+﻿
+<div class="x_panel">
+    <div class="x_title">
+        <h2><i class="fa fa-bars"></i> Tabs <small>Float left</small></h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li>
+                <a class="collapse-link" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-plus"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
     </div>
+    <div class="x_content">
+
+        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="!#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Matrix</a>
+                </li>
+                <li role="presentation" class="">
+                    <a href="!#tab_content2" ng-click="Show()" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Graph</a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                    <div>
+                        <table class="table">
+                            <tr>
+                                <th></th>
+                                <th ng-repeat="item in DataNodes">{{item.label}}</th>
+                            </tr>
+                            <tr ng-repeat="items in Datas">
+                                <td ng-repeat="item in items">
+                                    <input style="width:40px" type="number"  ng-model="item.value" />
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                    <div id="mynetwork" name="mynetwork" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>{{ModalTitle}}</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form ng-submit="Save(model)" class="form-horizontal form-label-left">
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Select</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <select ng-model="model.Periode" class="form-control">
+                                        <option>Choose option</option>
+                                        <option>Januari</option>
+                                        <option>Februari</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Max Jumlah Perawat Per Shif</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                  <input type="number" ng-model="model.Maximum" class="form-control"/>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Save</button>
+
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 
 <style type="text/css">
     #mynetwork {
-        margin-top:20px;
-        width: 1000px;
-        height: 300px;
-        border: 1px solid lightgray;
+        height: 700px;
+        border: 1px solid gray;
     }
 </style>
+
+
+
+
+
+
+
+

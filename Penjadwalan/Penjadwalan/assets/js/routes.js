@@ -5,9 +5,9 @@
                 templateUrl: "assets/templates/main.html",
                 controller:"MainController"
             })
-            .when("/petugas", {
-                templateUrl: "assets/templates/petugas.html",
-                controller: "PetugasController"
+            .when("/perawat", {
+                templateUrl: "assets/templates/perawat.html",
+                controller: "PerawatController"
             })
             .when("/graph", {
                 templateUrl: "assets/templates/graph.html",

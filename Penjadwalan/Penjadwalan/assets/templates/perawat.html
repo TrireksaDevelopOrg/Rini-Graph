@@ -1,0 +1,129 @@
+﻿<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>DAFTAR PETUGAS <small></small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-retweet"></i></a>
+                    </li>
+                    <li>
+                        <a ng-click="ModalTitle='Tambah Perawat'" class="item" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-plus"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+
+                                <th class="column-title">NIP</th>
+                                <th class="column-title">NAMA</th>
+                                <th class="column-title">GENDER</th>
+                                <th class="column-title">GOLONGAN</th>
+                                <th class="column-title">ALAMAT</th>
+                                <th class="column-title no-link last">
+                                    <span class="nobr">Action</span>
+                                </th>
+                                <th class="bulk-actions" colspan="7">
+                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="even pointer" ng-repeat="item in Perawats">
+                                <td class=" ">{{item.NIP}}</td>
+                                <td class=" ">{{item.Nama}}</td>
+                                <td class=" ">{{item.Gender}}</td>
+                                <td class=" ">{{item.Golongan}}</td>
+                                <td class=" ">{{item.Alamat}}</td>
+                                <td class=" last">
+                                    <a ng-click="SelectedItem(item)" style="color:yellowgreen" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-edit fa-2x"></i></a>
+                                    <a ng-click="Delete(item)" style="color:darkred"><i class="fa fa-remove fa-2x"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>{{ModalTitle}}</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form ng-submit="Save(model)" class="form-horizontal form-label-left">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">NIP</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input ng-model="model.NIP" type="text" class="form-control" placeholder="NIP">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input ng-model="model.Nama" type="text" class="form-control" placeholder="Nama">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Select</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <select ng-model="model.Gender" class="form-control">
+                                        <option>Choose option</option>
+                                        <option>Pria</option>
+                                        <option>Wanita</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Gologngan</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input ng-model="model.Golongan" type="text" class="form-control" placeholder="Golongan">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Alamat<span class="required"></span>
+                                </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <textarea ng-model="model.Alamat" class="form-control" rows="3" placeholder='Alamat'></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <button type="button" class="btn btn-warning" ng-click="model={}">Reset</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+
+

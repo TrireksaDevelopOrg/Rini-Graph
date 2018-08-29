@@ -8,11 +8,20 @@ namespace Penjadwalan.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize]
+       
         public ActionResult Index()
         {
+    
             return View();
         }
+
+        [Authorize]
+        public ActionResult Admin()
+        {
+
+            return View();
+        }
+
 
         public ActionResult About()
         {

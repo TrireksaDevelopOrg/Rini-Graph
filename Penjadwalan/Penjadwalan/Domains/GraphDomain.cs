@@ -44,6 +44,37 @@ namespace Penjadwalan.Domains
             }
         }
 
+        internal bool SaveJadwal(JadwalModel data)
+        {
+            using (var db = new OcphDbContext())
+            {
+                try
+                {
+                    var periodId = db.Periode.InsertAndGetLastID(data.Periode);
+                    if(periodId>0)
+                    {
+                        foreach(var item in data.Jadwals)
+                        {
+                            foreach(var date in item.Dates)
+                            {
+                                var jad = new jadwal { IdPeriode = periodId, Tanggal = date.Date, Shif = date.Value, IdPerawat = item.IdPerawat };
+                                if (!db.Jadwal.Insert(jad))
+                                    throw new SystemException("Data Gagal Disimpan");
+                            }
+                           
+                        }
+                        return true;
+                    }else
+                        throw new SystemException("Data Gagal Disimpan");
+                }
+                catch (Exception ex)
+                {
+
+                    throw new SystemException(ex.Message);
+                }
+            }
+        }
+
         internal Data GetLastPeriod()
         {
             using (var db = new OcphDbContext())
@@ -60,7 +91,7 @@ namespace Penjadwalan.Domains
                     }
                     else
                     {
-                        throw new SystemException("Data Periode Tidak Ditemukan");
+                        return new Data();
                     }
                 }
                 catch (Exception ex)

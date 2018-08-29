@@ -21,8 +21,8 @@ using Ocph.DAL;
                      }
           } 
 
-          [DbColumn("TanggalMulai")] 
-          public DateTime TanggalMulai 
+          [DbColumn("Bulan")] 
+          public int Bulan 
           { 
                get{return _tanggalmulai;} 
                set{ 
@@ -31,8 +31,8 @@ using Ocph.DAL;
                      }
           } 
 
-          [DbColumn("TanggalAkhir")] 
-          public DateTime TanggalAkhir 
+          [DbColumn("Tahun")] 
+          public int Tahun 
           { 
                get{return _tanggalakhir;} 
                set{ 
@@ -42,8 +42,8 @@ using Ocph.DAL;
           } 
 
           private int  _idperiode;
-           private DateTime  _tanggalmulai;
-           private DateTime  _tanggalakhir;
+           private int  _tanggalmulai;
+           private int  _tanggalakhir;
       }
 }
 

@@ -1,10 +1,8 @@
-﻿@{
-
-    ViewBag.Title = "Home Page";
+﻿@{ 
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 
-<script src="~/node_modules/vis/dist/vis.js"></script>
-<link href="~/node_modules/vis/dist/vis.css" rel="stylesheet" />
-<div ng-app="app">
+<div ng-app="mainapp"  >
     <ng-view></ng-view>
+
 </div>

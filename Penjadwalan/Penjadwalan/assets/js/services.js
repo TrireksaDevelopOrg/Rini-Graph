@@ -157,7 +157,7 @@ function PerawatServices($http, $q, AuthServices,MessageServices) {
             $http({
                 header: AuthServices.getHeader(),
                 method: "get",
-                url: "api/perawat",
+                url: "/api/perawat",
             }).then(function (response) {
                 angular.forEach(response.data, function (value, key) {
                     services.Perawats.push(value);
@@ -178,7 +178,7 @@ function PerawatServices($http, $q, AuthServices,MessageServices) {
         $http({
             header: AuthServices.getHeader(),
             method: "post",
-            url: "api/perawat",
+            url: "/api/perawat",
             data:model
         }).then(function (response) {
             services.Perawats.push(response.data);
@@ -197,7 +197,7 @@ function PerawatServices($http, $q, AuthServices,MessageServices) {
         $http({
             header: AuthServices.getHeader(),
             method: "put",
-            url: "api/perawat/" + model.IdPerawat,
+            url: "/api/perawat/" + model.IdPerawat,
             data:model
         }).then(function (response) {
             MessageServices.success("Data Berhasil Diubah");
@@ -215,7 +215,7 @@ function PerawatServices($http, $q, AuthServices,MessageServices) {
         var def = $q.defer();
         $http({
             method: "delete",
-            url: "api/perawat/"+model.IdPerawat,
+            url: "/api/perawat/"+model.IdPerawat,
         }).then(function (response) {
             var index = services.Perawats.indexOf(model);
             services.Perawats.splice(index, 1);
@@ -237,64 +237,78 @@ function PerawatServices($http, $q, AuthServices,MessageServices) {
 function MatrixServices($http,$q,MessageServices) {
     var services = {
         instance: false,
-        Perawats: [],
-        get: get, post: post, getLast: getLast
+        Matrixs: [],
+        get: get, post: post, getPeriode: getPeriode, getJadwal: getJadwal
     };
-    get();
+   
     function get() {
         var def = $q.defer();
         if (!services.instance) {
             services.instance = true;
             $http({
                 method: "get",
-                url: "api/matrik",
+                url: "/api/matrik",
             }).then(function (response) {
                 angular.forEach(response.data, function (value, key) {
-                    services.Perawats.push(value);
+                    services.Matrixs.push(value);
                 });
                 def.resolve(response.data);
             }, function (error) {
                 MessageServices.error(error.data);
             });
         } else {
-            def.resolve(services.Perawats);
+            def.resolve(services.Matrixs);
         }
 
         return def.promise;
     }
 
 
-    function getLast() {
-        var def = $q.defer();
-        $http({
-            method: "get",
-            url: "api/matrik/last",
-        }).then(function (response) {
-            def.resolve(response);
-        }, function (error) {
-            MessageServices.error(error.data);
-        });
-        return def.promise;
-    }
-
     function post(model) {
         var def = $q.defer();
         $http({
             method: "post",
-            url: "api/matrik",
+            url: "/api/matrik",
             data: model
         }).then(function (response) {
-            services.Perawats.push(response.data);
             def.resolve(response.data);
             MessageServices.success("Data Berhasil Disimpan");
             model = {};
         }, function (error) {
-            MessageServices.error(error.data);
+            MessageServices.error(error.data.Message);
         });
 
         return def.promise;
     }
 
+    function getPeriode() {
+        var def = $q.defer();
+        $http({
+            method: "get",
+            url: "/api/jadwal",
+        }).then(function (response) {
+            def.resolve(response.data);
+        }, function (error) {
+            MessageServices.error(error.data.Message);
+            def.reject();
+        });
+        return def.promise;
+    }
+
+
+    function getJadwal(item) {
+        var def = $q.defer();
+        $http({
+            method: "get",
+            url: "/api/jadwal/"+item.idperiode,
+        }).then(function (response) {
+            def.resolve(response.data);
+        }, function (error) {
+            MessageServices.error(error.data.Message);
+            def.reject();
+        });
+        return def.promise;
+    }
 
     return services;
 

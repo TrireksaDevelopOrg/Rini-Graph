@@ -3,88 +3,27 @@
         <div class="x_panel">
             <div class="x_title">
                 <h2>JADWAL <small></small></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li>
-                        <a class="collapse-link"><i class="fa fa-retweet"></i></a>
-                    </li>
-                    <li>
-                        <a class="item"><i class="fa fa-plus"></i></a>
-                    </li>
-                    <li>
-                        <a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                </ul>
+                
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <div class="table-responsive">
-                    <table class="table table-striped jambo_table bulk_action">
-                        <thead>
-                            <tr class="headings">
-
-                                <th class="column-title">NIP</th>
-                                <th class="column-title">NAMA</th>
-                                <th class="column-title">GENDER</th>
-                                <th class="column-title">ALAMAT</th>
-                                <th class="column-title">GOLONGAN</th>
-                                <th class="column-title no-link last">
-                                    <span class="nobr">Action</span>
-                                </th>
-                                <th class="bulk-actions" colspan="7">
-                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="even pointer">
-                                <td class=" ">121000040</td>
-                                <td class=" ">May 23, 2014 11:47:56 PM </td>
-                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-                                <td class=" ">John Blank L</td>
-                                <td class=" ">Paid</td>
-                                <td class=" last">
-                                    <a href="#">Edit</a>
-                                    <a href="#">Delete</a>
-                                </td>
-                            </tr>
-
-                            <tr class="even pointer">
-                                <td class=" ">121000040</td>
-                                <td class=" ">May 23, 2014 11:47:56 PM </td>
-                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-                                <td class=" ">John Blank L</td>
-                                <td class=" ">Paid</td>
-                                <td class=" last">
-                                    <a href="#">Edit</a>
-                                    <a href="#">Delete</a>
-                                </td>
-                            </tr>
-                            <tr class="even pointer">
-                                <td class=" ">121000040</td>
-                                <td class=" ">May 23, 2014 11:47:56 PM </td>
-                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-                                <td class=" ">John Blank L</td>
-                                <td class=" ">Paid</td>
-                                <td class=" last">
-                                    <a href="#">Edit</a>
-                                    <a href="#">Delete</a>
-                                </td>
-                            </tr>
-                            <tr class="even pointer">
-                                <td class=" ">121000040</td>
-                                <td class=" ">May 23, 2014 11:47:56 PM </td>
-                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-                                <td class=" ">John Blank L</td>
-                                <td class=" ">Paid</td>
-                                <td class=" last">
-                                    <a href="#" style="color:yellowgreen"><i class="fa fa-edit fa-2x"></i></a>
-                                    <a href="#" style="color:darkred"><i class="fa fa-remove fa-2x"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="row col-md-3" style="margin-bottom:10px">
+                    <label>Periode</label>
+                    <select class="form-control" ng-options="item as monthNames[item.Bulan]+' '+item.Tahun for item in Periodes track by item.idperiode" ng-model="selected" ng-change="SelectedItem(selected)"></select>
+                    <div class="clearfix"></div>
                 </div>
-
+                <table ng-show="selected!=undefided" style="margin-top:30px" class=" table table-bordered table-striped">
+                    <tr>
+                        <th>Perawat</th>
+                        <th ng-repeat="d in Jadwals[0].Jadwals">{{d.Tanggal |date:'d'}}</th>
+                    </tr>
+                    <tr ng-repeat="item in Jadwals">
+                        <td>{{item.Nama}}</td>
+                        <td ng-repeat="date in item.Jadwals">
+                            <div>{{date.Shif}}</div>
+                        </td>
+                    </tr>
+                </table>
 
             </div>
         </div>

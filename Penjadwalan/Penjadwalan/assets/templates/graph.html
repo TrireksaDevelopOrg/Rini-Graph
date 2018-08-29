@@ -1,5 +1,4 @@
-﻿
-<div class="x_panel">
+﻿<div class="x_panel">
     <div class="x_title">
         <h2><i class="fa fa-bars"></i> Tabs <small>Float left</small></h2>
         <ul class="nav navbar-right panel_toolbox">
@@ -10,42 +9,92 @@
         <div class="clearfix"></div>
     </div>
     <div class="x_content">
-
         <div class="" role="tabpanel" data-example-id="togglable-tabs">
             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a href="!#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Matrix</a>
+                <li role="presentation" class="">
+                    <a href="!#tab_content2" ng-click="Show()" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="true">Graph</a>
                 </li>
                 <li role="presentation" class="">
-                    <a href="!#tab_content2" ng-click="Show()" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Graph</a>
+                    <a  data-toggle="modal" data-target=".bs-example-modal-lg">Buat Jadwal</a>
                 </li>
             </ul>
             <div id="myTabContent" class="tab-content">
-                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                    <div>
-                        <table class="table">
-                            <tr>
-                                <th></th>
-                                <th ng-repeat="item in DataNodes">{{item.label}}</th>
-                            </tr>
-                            <tr ng-repeat="items in Datas">
-                                <td ng-repeat="item in items">
-                                    <input style="width:40px" type="number"  ng-model="item.value" />
-                                </td>
-                            </tr>
-                        </table>
-
-
-                    </div>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                <div role="tabpanel" class="tab-pane fade active in" id="tab_content2" aria-labelledby="profile-tab">
                     <div id="mynetwork" name="mynetwork" />
                 </div>
 
+                <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="calender-tab">
+                    <div>
+                        <div>Periode Bulan : {{Result.Periode}}</div>
+                        <table class="table table-bordered table-striped">
+                            <tr>
+                                <th>Perawat</th>
+                                <th ng-repeat="d in Calenders">{{d.getDate()}}</th>
+                            </tr>
+                            <tr ng-repeat="item in Result.Data">
+                                <td>{{item.Nama}}</td>
+                                <td ng-repeat="date in item.Dates">
+                                    <div>{{date.Value}}</div>
+                                </td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-success" ng-click="Save(Result)" >Simpan</button>
+                        <!--table class="table table-striped">
+                            <tr>
+                                <td ng-repeat="item in Graph">
+                                    <div>
+                                        {{item.Name}}
+                                        <div ng-repeat="data in item.Perawat">
+                                            <div id="{{data.Nama}}">  {{data.Nama}}</div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </!--table-->
+                    </div>
+                </div>
+
+                </div>
             </div>
-        </div>
     </div>
 </div>
+
+<style>
+    #P1{
+        color:red;
+    }
+
+    #P2 {
+        color: #ffea00;
+    }
+    #P3 {
+        color: #700a48;
+    }
+    #P4 {
+        color: #241aaa;
+    }
+    #P5 {
+        color: #d8e67b;
+    }
+    #P6 {
+        color: #4cff00;
+    }
+    #P7 {
+        color: #808080;
+    }
+    #P8 {
+        color: #1bc1ac;
+    }
+    #P9 {
+        color: #b337cb;
+    }
+    #P10 {
+        color: #dc8c1d;
+    }
+
+
+</style>
 
 
 
@@ -58,7 +107,7 @@
             <div class="modal-body">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>{{ModalTitle}}</h2>
+                        <h2>Jadwal Periode</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li>
                                 <button type="button" class="close" data-dismiss="modal">
@@ -70,7 +119,7 @@
                     </div>
                     <div class="x_content">
                         <br />
-                        <form ng-submit="Save(model)" class="form-horizontal form-label-left">
+                        <form  class="form-horizontal form-label-left">
 
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Select</label>
@@ -79,6 +128,16 @@
                                         <option>Choose option</option>
                                         <option>Januari</option>
                                         <option>Februari</option>
+                                        <option>Maret</option>
+                                        <option>April</option>
+                                        <option>Mei</option>
+                                        <option>Juni</option>
+                                        <option>Juli</option>
+                                        <option>Agustus</option>
+                                        <option>September</option>
+                                        <option>Oktober</option>
+                                        <option>November</option>
+                                        <option>Desember</option>
                                     </select>
                                 </div>
                             </div>
@@ -91,8 +150,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-success">Save</button>
-
+                                <button type="button" class="btn btn-warning" href="!#tab_content3" ng-click="BuatJadwal(model)" role="tab" id="calender-tab" data-toggle="tab" aria-expanded="false">Buat Jadwal</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
 

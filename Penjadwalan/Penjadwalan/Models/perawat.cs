@@ -70,14 +70,24 @@ using Ocph.DAL;
                     SetProperty(ref _gender, value);
                      }
           } 
+        public List<ItemJadwal> Dates { get; set; }
+        public List<jadwal> Jadwals { get; internal set; }
 
-          private int  _idperawat;
+        private int  _idperawat;
            private string  _nama;
            private string  _nip;
            private string  _golongan;
            private string  _alamat;
            private string  _gender;
       }
+
+
+
+    public class ItemJadwal
+    {
+        public DateTime Date { get; set; }
+        public string Value { get; set; }
+    }
 }
 
 

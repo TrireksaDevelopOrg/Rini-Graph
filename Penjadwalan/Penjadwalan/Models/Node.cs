@@ -13,7 +13,8 @@ namespace Penjadwalan.Models
         public string shape { get; set; }
         public color color { get; set; }
         public font font { get; set; }
-
+        public int Day { get; internal set; }
+        public bool IsMoorning { get; internal set; }
     }
 
 

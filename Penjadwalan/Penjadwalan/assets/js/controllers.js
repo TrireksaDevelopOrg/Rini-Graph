@@ -287,6 +287,7 @@ function GraphController($scope,$http,MatrixServices,$filter,PerawatServices) {
 
 
     $scope.BuatJadwal = function (model) {
+     
         var periode = CreatePeriode(model);
         $scope.Periode = periode;
         var a = $scope.Graph;
@@ -297,7 +298,7 @@ function GraphController($scope,$http,MatrixServices,$filter,PerawatServices) {
             angular.copy(val, item);
             item.Masuk = 0;
             perawats.push(item);
-        })
+        });
         var calenders = [];
         angular.forEach($scope.Graph, function (item, key) {
             item.Perawat = [];
@@ -430,9 +431,6 @@ function GraphController($scope,$http,MatrixServices,$filter,PerawatServices) {
         });
 
         MatrixServices.post(data);
-
-
-
     }
 
 }

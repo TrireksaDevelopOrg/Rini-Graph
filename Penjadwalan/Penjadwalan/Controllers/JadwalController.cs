@@ -13,7 +13,6 @@ namespace Penjadwalan.Controllers
         // GET: api/Jadwal
         public IHttpActionResult Get()
         {
-
             try
             {
                 Domains.JadwalDomain domain = new Domains.JadwalDomain();

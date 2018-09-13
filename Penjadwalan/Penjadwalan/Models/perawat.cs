@@ -59,9 +59,23 @@ using Ocph.DAL;
 
                     SetProperty(ref _alamat, value);
                      }
-          } 
+          }
 
-          [DbColumn("Gender")] 
+
+        [DbColumn("Aktif")]
+        public bool Aktif
+        {
+            get { return _aktif; }
+            set
+            {
+
+                SetProperty(ref _aktif, value);
+            }
+        }
+
+
+
+        [DbColumn("Gender")] 
           public string Gender 
           { 
                get{return _gender;} 
@@ -79,7 +93,8 @@ using Ocph.DAL;
            private string  _golongan;
            private string  _alamat;
            private string  _gender;
-      }
+        private bool _aktif;
+    }
 
 
 

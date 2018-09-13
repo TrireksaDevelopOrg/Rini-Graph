@@ -17,6 +17,7 @@ namespace Penjadwalan.Domains
             {
                 try
                 {
+                    List<perawat> list = new List<perawat>();
                     var periode = db.Periode.Where(O => O.idperiode == id).FirstOrDefault();
                     if (periode == null)
                         throw new SystemException("Periode Tidak Ditemukan");
@@ -26,9 +27,11 @@ namespace Penjadwalan.Domains
                         foreach (var item in results)
                         {
                             item.Jadwals = db.Jadwal.Where(O => O.IdPeriode == id && O.IdPerawat==item.IdPerawat).ToList();
+                            if (item.Jadwals != null && item.Jadwals.Count > 0)
+                                list.Add(item);
                         }
 
-                        return results;
+                        return list;
                     }
                 }
                 catch (Exception ex)

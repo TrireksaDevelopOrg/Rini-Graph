@@ -52,7 +52,19 @@ namespace Penjadwalan.Domains
                 }
                 catch (Exception ex)
                 {
-                    throw new SystemException(ex.Message);
+                    if(ex.Message.Contains("Cannot delete or update a parent row"))
+                    {
+                        if (db.Perawat.Update(O => new { O.Aktif }, new perawat { Aktif = false, IdPerawat = id }, O => O.IdPerawat == id))
+                            return Task.FromResult(true);
+                        else
+                            throw new SystemException("Data Gagal Diubah");
+                    }
+                    else
+                    {
+                        throw new SystemException(ex.Message);
+                    }
+
+                   
                 }
             }
         }

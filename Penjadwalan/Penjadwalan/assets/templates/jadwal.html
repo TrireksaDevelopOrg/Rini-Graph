@@ -1,31 +1,65 @@
-﻿<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>JADWAL <small></small></h2>
-                
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <div class="row col-md-3" style="margin-bottom:10px">
-                    <label>Periode</label>
-                    <select class="form-control" ng-options="item as monthNames[item.Bulan]+' '+item.Tahun for item in Periodes track by item.idperiode" ng-model="selected" ng-change="SelectedItem(selected)"></select>
-                    <div class="clearfix"></div>
-                </div>
-                <table ng-show="selected!=undefided" style="margin-top:30px" class=" table table-bordered table-striped">
-                    <tr>
-                        <th>Perawat</th>
-                        <th ng-repeat="d in Jadwals[0].Jadwals">{{d.Tanggal |date:'d'}}</th>
-                    </tr>
-                    <tr ng-repeat="item in Jadwals">
-                        <td>{{item.Nama}}</td>
-                        <td ng-repeat="date in item.Jadwals">
-                            <div>{{date.Shif}}</div>
-                        </td>
-                    </tr>
-                </table>
+﻿
 
+
+<div class="x_panel" style=" width: 100%; overflow-x:auto;">
+    <style>
+        .print-only {
+            display: none;
+        }
+
+        @media print {
+            .no-print {
+                display: none;
+            }
+
+            .print-only {
+                display: block;
+            }
+        }
+    </style>
+    <div class="x_title">
+        <h2>JADWAL <small></small></h2>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        <div class="print-only">
+            <center>
+                <h2>JADWAL JAGA PERAWAT UGD</h2>
+                <h2>RUMKITAL DR. SOEDIBJO SARDADI JAYAPURA JAYAPURA</h2>
+                <img style="width:150PX" src="../../images/Logo_Lantamal_X_Armatim.png" />
+            </center>
+        </div>
+        <div class="row col-md-3" style="margin-bottom:10px">
+            <div class="col-md-3"><h4>Periode</h4></div>
+            <div class="col-md-9">
+                <select class="form-control" ng-options="item as monthNames[item.Bulan]+' '+item.Tahun for item in Periodes track by item.idperiode" ng-model="selected" ng-change="SelectedItem(selected)"></select>
             </div>
         </div>
+
+        <table ng-show="selected!=undefided" style="margin-top:30px" class=" table table-bordered table-striped">
+            <tr>
+                <th>PERAWAT</th>
+                <th>NIP</th>
+                <th>STATUS</th>
+                <th ng-repeat="d in Jadwals[0].Jadwals">{{d.Tanggal |date:'d'}}</th>
+            </tr>
+            <tr ng-repeat="item in Jadwals">
+                <td>{{item.Nama}}</td>
+                <td>{{item.NIP}}</td>
+                <td>{{item.Golongan}}</td>
+                <td ng-repeat="date in item.Jadwals">
+                    <div>{{date.Shif}}</div>
+                </td>
+            </tr>
+        </table>
+        <div class="print-only">
+           <h4>Keterangan</h4> 
+            <h5>L = Libur</h5>
+            <h5>M = Malam</h5>
+            <h5>P = Pagei</h5>
+        </div>
+        <div class="clearfix"></div>
     </div>
+
+
 </div>

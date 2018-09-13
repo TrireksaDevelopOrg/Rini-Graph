@@ -895,6 +895,7 @@
     <Content Include="bower_components\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="bower_components\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="bower_components\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\penjadwalan - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\penjadwalan - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />

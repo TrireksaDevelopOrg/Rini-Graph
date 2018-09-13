@@ -265,6 +265,7 @@ function MatrixServices($http,$q,MessageServices) {
 
 
     function post(model) {
+        NProgress.start();
         var def = $q.defer();
         $http({
             method: "post",
@@ -274,6 +275,7 @@ function MatrixServices($http,$q,MessageServices) {
             def.resolve(response.data);
             MessageServices.success("Data Berhasil Disimpan");
             model = {};
+            NProgress.done();
         }, function (error) {
             MessageServices.error(error.data.Message);
         });
@@ -285,7 +287,7 @@ function MatrixServices($http,$q,MessageServices) {
         var def = $q.defer();
         $http({
             method: "get",
-            url: "/api/jadwal",
+            url: "/api/jadwal"
         }).then(function (response) {
             def.resolve(response.data);
         }, function (error) {

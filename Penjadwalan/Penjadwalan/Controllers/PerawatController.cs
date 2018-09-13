@@ -20,7 +20,7 @@ namespace Penjadwalan.Controllers
             try
             {
                 var resul = await domain.GetPerawat();
-                return Ok(resul);
+                return Ok(resul.Where(O=>O.Aktif));
             }
             catch (Exception ex)
             {
@@ -48,6 +48,7 @@ namespace Penjadwalan.Controllers
         {
             try
             {
+                value.Aktif = true;
                 var result = await domain.SaveChange(value);
                 return Ok(result);
             }
